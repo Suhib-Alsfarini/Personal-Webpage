@@ -1,0 +1,14 @@
+Iberdrola innovation middle east is an international company with its headquarters being in Bilbao - Spain.
+
+The middle east innovation branch focus research focuses on renewable energy and its relevant topics like smart grids, Smart homes, Electric vehicles and mixing AI tools like Computer vision and others for different projects.
+
+My internship was in two departments,
+I started in the power team and my task was to create an AI model to detect a type of fault in the grid that happens when you integrate Type 4 wind turbines as a mean of renewable energy.
+
+This fault is named Sub-Synchronous oscillations, and the main effect is that a new frequency will appear in your grid that is below 60 Hz, this naturally is not desired and will damage you system.
+
+So i created a simple LSTM Time series based AI model to detect whether the given data has this SSOs or not.
+
+Then i moved to the Data science team, where my task was simply to do data annotation, however i was very new to the whole field so i learned all about computer vision and the experience was very useful for my graduation project.
+
+And although i never used CV directly, it helped me to communicate clearly what needs to be done and how to view it a project manager.

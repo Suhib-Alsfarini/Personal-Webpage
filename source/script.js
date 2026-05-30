@@ -1,3 +1,25 @@
+// Sidebar Collapse/Expand functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const expandBtn = document.getElementById('sidebar-expand-btn');
+
+    if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            sidebar.classList.toggle('collapsed');
+            document.body.classList.toggle('sidebar-collapsed');
+        });
+    }
+
+    if (expandBtn) {
+        expandBtn.addEventListener('click', function() {
+            sidebar.classList.remove('collapsed');
+            document.body.classList.remove('sidebar-collapsed');
+        });
+    }
+});
+
 // Navigation functionality
 const navLinks = document.querySelectorAll('.nav-link');
 const sections = document.querySelectorAll('.content-section');
@@ -78,6 +100,36 @@ navLinks.forEach(link => {
     });
 });
 
+// Media toggle (Photos/Videos) - works for all phases
+function initMediaToggleButtons(){
+    document.querySelectorAll('.race-toggle').forEach(toggle => {
+        const btns = toggle.querySelectorAll('.race-toggle-btn');
+        btns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const parentPhase = btn.closest('.phase-content');
+                if (!parentPhase) return;
+
+                // update button states
+                btns.forEach(b => {
+                    const active = b === btn;
+                    b.classList.toggle('active', active);
+                    b.setAttribute('aria-pressed', active ? 'true' : 'false');
+                });
+
+                const targetId = btn.getAttribute('data-target');
+                if (!targetId) return;
+
+                // show target and hide other media sections (photos/videos/presentations/years) within the same phase
+                parentPhase.querySelectorAll('[id$="-photos-section"], [id$="-videos-section"], [id$="-final-section"], [id$="-first-section"], [id$="-2025-section"], [id$="-2026-section"]').forEach(el => {
+                    el.style.display = (el.id === targetId) ? 'block' : 'none';
+                });
+            });
+        });
+    });
+}
+
+document.addEventListener('DOMContentLoaded', initMediaToggleButtons);
+
 // Handle page load with hash in URL, if the user edits the URL manually or uses back/forward buttons
 function loadSectionFromHash() {
     const hash = window.location.hash;
@@ -117,6 +169,111 @@ const projectCategories = document.querySelectorAll('.project-category-card');
 projectCategories.forEach(cat => {
     cat.classList.remove('hidden');
     cat.style.display = 'block';
+});
+
+// Project navigation (projects list + phases)
+const projectNavButtons = document.querySelectorAll('.project-nav-btn');
+const projectContents = document.querySelectorAll('.project-content');
+const phaseTabs = document.querySelectorAll('.phase-tab');
+const phaseContents = document.querySelectorAll('.phase-content');
+
+function showProject(projectKey) {
+    // update nav buttons
+    projectNavButtons.forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-project') === projectKey));
+    // show matching project content
+    projectContents.forEach(content => {
+        const id = content.id.replace('-content', '');
+        if (id === projectKey) {
+            content.style.display = 'block';
+            content.classList.add('active');
+        } else {
+            content.style.display = 'none';
+            content.classList.remove('active');
+        }
+    });
+}
+
+projectNavButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const projectKey = btn.getAttribute('data-project');
+        showProject(projectKey);
+        // reset to first phase of the project (if any)
+        const projectEl = document.getElementById(projectKey + '-content');
+        if (projectEl) {
+            const firstTab = projectEl.querySelector('.phase-tab');
+            if (firstTab) firstTab.click();
+        }
+    });
+});
+
+// Phase tab switching (works per project and club)
+phaseTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        const projectSection = tab.closest('.project-content') || tab.closest('.club-content');
+        if (!projectSection) return;
+        const phase = tab.getAttribute('data-phase');
+
+        // deactivate sibling tabs
+        projectSection.querySelectorAll('.phase-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        // hide/show phase contents inside this project/club
+        projectSection.querySelectorAll('.phase-content').forEach(pc => {
+            if (pc.id === phase) {
+                pc.style.display = 'block';
+                pc.classList.add('active');
+            } else {
+                pc.style.display = 'none';
+                pc.classList.remove('active');
+            }
+        });
+    });
+});
+
+// Initialize: ensure default project and phase are visible
+document.addEventListener('DOMContentLoaded', () => {
+    const activeProjectBtn = document.querySelector('.project-nav-btn.active') || projectNavButtons[0];
+    if (activeProjectBtn) showProject(activeProjectBtn.getAttribute('data-project'));
+
+    // trigger initial phase activation for visible project
+    const visibleProject = document.querySelector('.project-content.active') || document.querySelector('.project-content');
+    if (visibleProject) {
+        const firstPhase = visibleProject.querySelector('.phase-tab');
+        if (firstPhase) firstPhase.click();
+    }
+});
+
+// Internship navigation
+const internshipNavButtons = document.querySelectorAll('.internship-nav-btn');
+const internshipContents = document.querySelectorAll('.internship-content');
+
+function showInternship(internshipKey) {
+    // update nav buttons
+    internshipNavButtons.forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-internship') === internshipKey));
+    // show matching internship content
+    internshipContents.forEach(content => {
+        const id = content.id.replace('-content', '');
+        if (id === internshipKey) {
+            content.style.display = 'block';
+            content.classList.add('active');
+        } else {
+            content.style.display = 'none';
+            content.classList.remove('active');
+        }
+    });
+}
+
+internshipNavButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const internshipKey = btn.getAttribute('data-internship');
+        showInternship(internshipKey);
+    });
+});
+
+// Initialize: ensure default internship is visible
+document.addEventListener('DOMContentLoaded', () => {
+    const activeInternshipBtn = document.querySelector('.internship-nav-btn.active') || internshipNavButtons[0];
+    if (activeInternshipBtn) showInternship(activeInternshipBtn.getAttribute('data-internship'));
 });
 
 filterButtons.forEach(button => {
@@ -176,4 +333,50 @@ filterButtons.forEach(button => {
             });
         }
     });
+});
+
+// Club navigation (IEEE / Meshkat)
+const clubNavButtons = document.querySelectorAll('.club-nav-btn');
+const clubContents = document.querySelectorAll('.club-content');
+
+function showClub(clubKey) {
+    // update nav buttons
+    clubNavButtons.forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-club') === clubKey));
+    // show matching club content
+    clubContents.forEach(content => {
+        const id = content.id.replace('-content', '');
+        if (id === clubKey) {
+            content.style.display = 'block';
+            content.classList.add('active');
+        } else {
+            content.style.display = 'none';
+            content.classList.remove('active');
+        }
+    });
+}
+
+clubNavButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const clubKey = btn.getAttribute('data-club');
+        showClub(clubKey);
+        // reset to first phase of the club (if any)
+        const clubEl = document.getElementById(clubKey + '-content');
+        if (clubEl) {
+            const firstTab = clubEl.querySelector('.phase-tab');
+            if (firstTab) firstTab.click();
+        }
+    });
+});
+
+// Initialize: ensure default club is visible
+document.addEventListener('DOMContentLoaded', () => {
+    const activeClubBtn = document.querySelector('.club-nav-btn.active') || clubNavButtons[0];
+    if (activeClubBtn) showClub(activeClubBtn.getAttribute('data-club'));
+
+    // trigger initial phase activation for visible club
+    const visibleClub = document.querySelector('.club-content.active') || document.querySelector('.club-content');
+    if (visibleClub) {
+        const firstPhase = visibleClub.querySelector('.phase-tab');
+        if (firstPhase) firstPhase.click();
+    }
 });

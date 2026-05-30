@@ -1,0 +1,22 @@
+This is the first industry led hackathon made by QRDI x Lumi X Iberdrola , it has 5 tracks. 
+
+I chose the Problem of Adoption of Electric Vehicles (EVS) in Qatar, the team was very diverse as we had a Phd student specialized in batteries and a business analytics student as well.
+
+We found through our research that the biggest reason is the awareness of the general public and fear of some features.
+
+So for that we came up with an App that tackles the issue of awareness and concerns of the people, with it having some AI features that makes these decisions or features backed by real time data.
+
+the Three main features:
+- Smart trip planner: where you can view all chargers, reviews of it, average waiting and charging time, and the option to pre book the charger
+- Cost Comparison: Compares Between your current petrol car Vs an EV of your choice, Also does that on a break even point analysis and how much you will be saving after it
+- Safety Academy: Provides Basic safety training and knowledge on how to deal with EVs, to tackle the safety concerns
+
+
+
+We Also concluded that this needs to be a nation wide movement, so we included plans for collaborations across the country:
+
+- Charging Stations: we can optimize the scheduling   and provide necessary data for the smart trip planner
+- Bus Operators: Deploy a monitoring system for all EVs and provide a call center for any inquiries.
+
+
+And some other ideas, if you are interested in this feel free to reach out.

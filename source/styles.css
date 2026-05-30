@@ -62,19 +62,19 @@ body {
     height: 100vh;
     background-color: #ffffff;
     padding: 30px 20px;
-    overflow-y: auto;
-    border-right: 1px solid #e0e0e0;
+    overflow: hidden;
     z-index: 100;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: width 0.3s ease;
 }
 .profile-top-section{
-    flex: 1;
+    flex: 0 1 auto;
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    border-bottom: 1px solid #e0e0e0;
+    gap: 20px;
 }
 .profile-section {
     text-align: center;
@@ -194,6 +194,156 @@ body {
 
 .social-btn:hover i {
     transform: scale(1.2) rotate(5deg);
+}
+
+/* Sidebar Toggle Button */
+.sidebar-toggle {
+    position: absolute;
+    top: 50%;
+    right: -18px;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 60px;
+    background: #8b0000;
+    color: #ffffff;
+    border: none;
+    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 110;
+    transition: all 0.3s ease;
+    box-shadow: 3px 0 8px rgba(139, 0, 0, 0.3);
+}
+
+.sidebar-toggle:hover {
+    background: #a52a2a;
+    right: -18px;
+    width: 36px;
+}
+
+.sidebar-toggle i {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+}
+
+/* Sidebar collapsed state */
+.sidebar.collapsed {
+    width: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.sidebar.collapsed .sidebar-toggle {
+    position: fixed;
+    left: 0;
+    right: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 60px;
+    display: flex;
+    border-radius: 0 6px 6px 0;
+    box-shadow: 3px 0 8px rgba(139, 0, 0, 0.3);
+}
+
+.sidebar.collapsed .sidebar-toggle:hover {
+    width: 36px;
+}
+
+.sidebar.collapsed .sidebar-toggle i {
+    transform: rotate(180deg);
+}
+
+.sidebar.collapsed .profile-top-section,
+.sidebar.collapsed .profile-section,
+.sidebar.collapsed .profile-image,
+.sidebar.collapsed .name,
+.sidebar.collapsed .institution,
+.sidebar.collapsed .social-links,
+.sidebar.collapsed .copy-right {
+    display: none;
+}
+
+/* When sidebar is collapsed, shift header and main content */
+.sidebar-collapsed .header {
+    left: 0;
+}
+
+.sidebar-collapsed .main-content {
+    margin-left: 0;
+}
+
+/* Enlarge content when sidebar is collapsed */
+.sidebar-collapsed .main-content .section-header h2 {
+    font-size: 28px;
+}
+
+.sidebar-collapsed .main-content .about-text {
+    font-size: 18px;
+    line-height: 2;
+}
+
+.sidebar-collapsed .main-content .education-detail {
+    font-size: 18px;
+}
+
+.sidebar-collapsed .main-content .info-label {
+    font-size: 17px;
+}
+
+.sidebar-collapsed .main-content .info-value {
+    font-size: 17px;
+    line-height: 28px;
+}
+
+.sidebar-collapsed .main-content .education-institution {
+    font-size: 22px;
+}
+
+.sidebar-collapsed .main-content .project-image {
+    transform: scale(1.06);
+    margin-bottom: 20px;
+}
+
+.sidebar-collapsed .main-content .project-nav-btn {
+    font-size: 15px;
+    padding: 14px 32px;
+}
+
+.sidebar-collapsed .main-content .phase-tab {
+    font-size: 15px;
+    padding: 14px 22px;
+}
+
+.sidebar-collapsed .main-content .course-item {
+    font-size: 16px;
+}
+
+.sidebar-collapsed .main-content .research-intro {
+    font-size: 18px;
+    line-height: 2;
+}
+
+/* Email display (non-clickable) */
+.email-display {
+    cursor: default !important;
+    user-select: all !important;
+    -webkit-user-select: all !important;
+}
+
+.email-display:hover {
+    background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%) !important;
+    color: #333 !important;
+    border-color: #e0e0e0 !important;
+    border-left-color: #333 !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.email-display i {
+    color: #8b0000;
 }
 
 .copy-right{
@@ -331,15 +481,23 @@ body {
 }
 
 .section-header {
-    margin-bottom: 25px;
-    padding-bottom: 15px;
-    border-bottom: 3px solid #333;
+    margin-bottom: 30px;
+    padding: 20px 25px;
+    background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
+    border-left: 5px solid #8b0000;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .section-header h2 {
     font-size: 24px;
     font-weight: 700;
     letter-spacing: 1px;
+    text-align: center;
+    margin: 0;
 }
 
 /* About Section */
@@ -514,6 +672,32 @@ body {
     width: 100%;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Custom bullet list styling for Rihla EV project description */
+.rihla-bullets {
+    margin: 12px 0 12px 40px;
+    padding: 0;
+    list-style: none;
+}
+
+.rihla-bullets li {
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.7;
+    font-size: 14px;
+    color: #555;
+}
+
+.rihla-bullets li::before {
+    content: '•';
+    position: absolute;
+    left: 2px;
+    top: 0;
+    font-size: 18px;
+    font-weight: 900;
+    color: #333;
 }
 
 .project-item strong{
@@ -997,7 +1181,8 @@ body {
 
 .education-info-row {
     display: flex;
-    gap: 15px;
+    flex-direction: column;
+    gap: 10px;
     margin-bottom: 12px;
     align-items: flex-start;
 }
@@ -1019,7 +1204,8 @@ body {
 
 .info-value {
     flex: 1;
-    display: inline;
+    display: block;
+    width: 100%;
     color: #333;
     font-size: 15px;
     line-height: 25px;
@@ -1031,6 +1217,33 @@ body {
 
 .info-value p {
     margin: 5px
+}
+
+.course-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+    line-height: 1.6;
+}
+
+.course-item:last-child {
+    border-bottom: none;
+}
+
+.course-num {
+    font-weight: 800;
+    color: #000;
+    font-size: 15px;
+    min-width: 20px;
+    display: inline-block;
+    flex-shrink: 0;
+    text-align: right;
+}
+
+.course-text {
+    flex: 1;
 }
 
 /* Responsive adjustments for education section */
@@ -1050,10 +1263,472 @@ body {
     }
 }
 
+/* Internships Navigation */
+.internship-nav-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0;
+    padding: 0;
+}
+
+.internship-nav-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 20px;
+    background: #f8f8f8;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+}
+
+.internship-nav-btn {
+    padding: 12px 28px;
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #333;
+    letter-spacing: 0.5px;
+}
+
+.internship-nav-btn:hover {
+    background: #f0f0f0;
+    border-color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.internship-nav-btn.active {
+    background: linear-gradient(135deg, #8b0000 0%, #a52a2a 100%);
+    color: white;
+    border-color: #8b0000;
+    box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
+}
+
+.internship-nav-btn.active:hover {
+    background: linear-gradient(135deg, #a52a2a 0%, #c00000 100%);
+    transform: translateY(-2px);
+}
+
+/* Internships Section */
+.internship-section {
+    margin-top: 40px;
+    width: 100%;
+}
+
+.internship-category-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border: 1px solid #e0e0e0;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.internship-category-card:hover {
+    box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+}
+
+.internship-item {
+    padding: 25px;
+    margin-bottom: 0;
+    background-color: #f9f9f9;
+    border: 1px solid #d0d0d0;
+    transition: all 0.3s ease;
+}
+
+.internship-item:hover {
+    box-shadow: -4px 4px 12px rgba(0,0,0,0.12);
+    background-color: #ffffff;
+}
+
+.internship-company-group {
+    padding: 25px;
+    background-color: #f9f9f9;
+    border: 1px solid #d0d0d0;
+}
+
+.internship-company-container {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.internship-logo-wrapper {
+    flex-shrink: 0;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.internship-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: all 0.3s ease;
+}
+
+.internship-logo:hover {
+    transform: scale(1.1);
+}
+
+.internship-company-name {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+}
+
+.internship-company-name h4 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.internship-experience-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #ffffff;
+    border-left: 3px solid #8b0000;
+    border-radius: 3px;
+}
+
+.internship-experience-item:last-child {
+    margin-bottom: 0;
+}
+
+.internship-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.internship-role {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000;
+    margin: 0;
+    letter-spacing: 0.3px;
+}
+
+.internship-date {
+    font-size: 14px;
+    color: #666;
+    font-style: italic;
+    font-weight: 500;
+    padding: 6px 15px;
+    background-color: #f5f5f5;
+    border-radius: 20px;
+    border: 1px solid #e0e0e0;
+}
+
+.internship-description {
+    font-size: 14px;
+    color: #555;
+    margin: 12px 0;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: justify;
+}
+
+.internship-images {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #f0f0f0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    min-height: 100px;
+    background-color: #f9f9f9;
+    border-radius: 3px;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    font-size: 13px;
+}
+
+.internship-images:empty::before {
+    content: "Images can be added here";
+    color: #ccc;
+    font-style: italic;
+}
+
+/* Responsive adjustments for internship section */
+@media (max-width: 768px) {
+    .internship-company-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .internship-logo-wrapper {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .internship-company-name {
+        text-align: center;
+    }
+    
+    .internship-title-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .internship-description {
+        font-size: 13px;
+    }
+}
+
 /* Projects Section */
 .projects-section {
     margin-top: 10px;
     width: 100%;
+}
+
+/* Project Navigation Container */
+.project-nav-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0;
+    padding: 0;
+}
+
+.project-nav-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 20px;
+    background: #f8f8f8;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+}
+
+.project-nav-btn {
+    padding: 12px 28px;
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #333;
+    letter-spacing: 0.5px;
+}
+
+.project-nav-btn:hover {
+    background: #f0f0f0;
+    border-color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.project-nav-btn.active {
+    background: linear-gradient(135deg, #8b0000 0%, #a52a2a 100%);
+    color: white;
+    border-color: #8b0000;
+    box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
+}
+
+.project-nav-btn.active:hover {
+    background: linear-gradient(135deg, #a52a2a 0%, #c00000 100%);
+    transform: translateY(-2px);
+}
+
+/* Club Navigation (same styling as projects) */
+.club-nav-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0;
+    padding: 0;
+}
+
+.club-nav-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 20px;
+    background: #f8f8f8;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+}
+
+.club-nav-btn {
+    padding: 12px 28px;
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #333;
+    letter-spacing: 0.5px;
+}
+
+.club-nav-btn:hover {
+    background: #f0f0f0;
+    border-color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.club-nav-btn.active {
+    background: linear-gradient(135deg, #8b0000 0%, #a52a2a 100%);
+    color: white;
+    border-color: #8b0000;
+    box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
+}
+
+.club-nav-btn.active:hover {
+    background: linear-gradient(135deg, #a52a2a 0%, #c00000 100%);
+    transform: translateY(-2px);
+}
+
+/* Phase Tabs */
+.phase-tabs {
+    display: flex;
+    gap: 10px;
+    margin: 20px 25px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 0;
+}
+
+.phase-tab {
+    padding: 12px 20px;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #666;
+    letter-spacing: 0.5px;
+}
+
+.phase-tab:hover {
+    color: #333;
+    border-bottom-color: #ddd;
+}
+
+.phase-tab.active {
+    color: #8b0000;
+    border-bottom-color: #8b0000;
+}
+
+/* Project Content */
+.project-content {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 0;
+    margin-bottom: 35px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border: 1px solid #e0e0e0;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    display: none;
+}
+
+.project-content.active {
+    display: block;
+}
+
+.project-header {
+    background: linear-gradient(135deg, #8b0000 0%, #a52a2a 100%);
+    color: #ffffff;
+    padding: 30px 25px;
+    margin-bottom: 0;
+    margin-top: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.project-title {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin: 0 0 10px 0;
+}
+
+.project-description {
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0 0 15px 0;
+    opacity: 0.95;
+}
+
+.project-view-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.project-view-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateX(4px);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.project-view-btn i {
+    font-size: 12px;
+}
+
+.phase-content {
+    padding: 25px;
+    display: none;
+}
+
+.phase-content.active {
+    display: block;
+}
+
+.phase-content h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 20px 0;
+    color: #333;
+    letter-spacing: 1px;
 }
 
 /* Project Filter Buttons */
@@ -1152,30 +1827,148 @@ body {
 }
 
 .project-images{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    column-count: 3;
+    column-gap: 15px;
     margin-bottom: 20px;
     border-bottom: 1px solid #e0e0e0;
-    gap: 15px;
-    flex-wrap: wrap;
     padding: 10px;
     background: #f8f8f8;
     width: 100%;
 }
 .project-image{
-    width: 280px;
+    width: 100%;
     height: auto;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     transition: all 0.3s ease;
     border: 2px solid #fff;
+    margin-bottom: 15px;
+    break-inside: avoid;
 }
 .project-image:hover{
     transform: scale(1.02);
     box-shadow: 0 6px 20px rgba(0,0,0,0.25);
     border-color: #000;
+}
+
+/* Subfolder Section Styling */
+.subfolder-section {
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 2px solid #d0d0d0;
+}
+
+.subfolder-section:last-child {
+    border-bottom: none;
+}
+
+.subfolder-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #8b0000;
+    margin: 20px 0 15px 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #a52a2a;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* PDF Gallery Styling */
+.pdf-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.pdf-item {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.pdf-item:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    transform: translateY(-5px);
+}
+
+.pdf-scrollable-container {
+    width: 100%;
+    height: 600px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: #f5f5f5;
+    flex: 1;
+}
+
+.pdf-scrollable-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+.pdf-item > p {
+    padding: 15px;
+    text-align: center;
+    font-weight: 600;
+    color: #333;
+    background-color: #f8f8f8;
+    border-top: 2px solid #e0e0e0;
+    margin: 0;
+    font-size: 14px;
+}
+
+/* Custom scrollbar for PDF containers */
+.pdf-scrollable-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.pdf-scrollable-container::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 5px;
+}
+
+.pdf-scrollable-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #8b0000, #a52a2a);
+    border-radius: 5px;
+    border: 2px solid #f0f0f0;
+}
+
+.pdf-scrollable-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #a52a2a, #8b0000);
+}
+
+/* Race toggle (Photos / Videos) */
+.race-toggle{
+    display: flex;
+    gap: 10px;
+    margin: 12px 0 20px 0;
+    align-items: center;
+}
+.race-toggle-btn{
+    background: #fff;
+    color: #8b0000;
+    border: 2px solid #a52a2a;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+.race-toggle-btn.active{
+    background: linear-gradient(90deg, #a52a2a, #8b0000);
+    color: #fff;
+    border-color: #8b0000;
+}
+.race-toggle-btn:focus{
+    outline: 3px solid rgba(139,0,0,0.15);
 }
 
 .project-item:last-child {

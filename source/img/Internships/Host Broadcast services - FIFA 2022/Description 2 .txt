@@ -1,0 +1,11 @@
+After the Al-Thumama Stadium Matches were Completed, i had the chance to pe a part of the de-rigging team, which basically is located in the QNCC education city and acts as the main hub for all different distributors.
+
+So we started the de-rigging operation one day or two before the final match, and then speed up the process to make sure the whole center is dismantled in a week or two, Also for other colleagues to catch up on christmas.
+
+Because of the nature of this operation there isn't room for new skills to build, however I managed to learn the whole process as why do we need a central place, how is it organized, and most importantly as an electrical engineer:
+
+How does the live stream only have such little delay?
+How does the wiring or the medium of transmission affect the timing and quality of steam?
+Importance of a small local booth for the distributers to be in Qatar?
+
+and this correlates directly to the topics of Communication and Networks.

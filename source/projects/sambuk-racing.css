@@ -361,6 +361,129 @@ body {
     margin: 0;
 }
 
+/* Marketing Tabs */
+.marketing-tabs {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.tab-button {
+    padding: 15px 25px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: var(--text-secondary);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: -2px;
+}
+
+.tab-button:hover {
+    color: var(--primary-color);
+}
+
+.tab-button.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+.tab-button i {
+    font-size: 18px;
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Responsive Video Embed */
+.responsive-iframe {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    background-color: #000;
+    border-radius: 8px;
+    box-shadow: var(--shadow-light);
+}
+
+.responsive-iframe iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-section {
+    margin-bottom: 40px;
+}
+
+/* Sponsor Videos Grid */
+.sponsors-videos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.sponsor-video-card {
+    background-color: var(--background-color);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: var(--shadow-light);
+    transition: all 0.3s ease;
+}
+
+.sponsor-video-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.sponsor-logo-placeholder {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 40px 20px;
+    border-radius: 6px;
+    text-align: center;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 100px;
+    gap: 10px;
+}
+
+.sponsor-logo-placeholder i {
+    font-size: 36px;
+    opacity: 0.8;
+}
+
+.sponsor-logo-placeholder p {
+    font-weight: 600;
+    font-size: 16px;
+    margin: 0;
+}
+
+.sponsor-video-card .responsive-iframe {
+    border-radius: 6px;
+}
+
 /* Video Container */
 .video-container {
     display: grid;
@@ -591,6 +714,25 @@ body {
         max-width: 95vw;
         max-height: 95vh;
     }
+
+    .marketing-tabs {
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .tab-button {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+
+    .tab-button i {
+        font-size: 16px;
+    }
+
+    .sponsors-videos-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -651,6 +793,135 @@ body {
     .info-box {
         padding: 15px;
     }
+}
+
+/* Marketing Materials Tabs */
+.marketing-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0;
+}
+
+.tab-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 15px 20px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: var(--text-secondary);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    margin-bottom: -2px;
+}
+
+.tab-button:hover {
+    color: var(--primary-color);
+    background-color: rgba(30, 64, 175, 0.05);
+}
+
+.tab-button.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+.tab-button i {
+    font-size: 18px;
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Video Section */
+.video-section {
+    margin-bottom: 20px;
+}
+
+/* Responsive Iframe Wrapper */
+.responsive-iframe {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    background-color: #000;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-light);
+}
+
+.responsive-iframe iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 8px;
+}
+
+/* Sponsor Videos Grid */
+.sponsors-videos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* Sponsor Video Card */
+.sponsor-video-card {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: var(--background-color);
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-light);
+    transition: all 0.3s ease;
+}
+
+.sponsor-video-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+/* Sponsor Logo Placeholder */
+.sponsor-logo-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    min-height: 120px;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.sponsor-logo-placeholder i {
+    font-size: 48px;
+    opacity: 0.5;
+}
+
+.sponsor-logo-placeholder p {
+    font-size: 14px;
+    margin: 0;
+    font-weight: 600;
 }
 
 /* Scrollbar Styling */

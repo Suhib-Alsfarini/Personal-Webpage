@@ -119,8 +119,8 @@ function initMediaToggleButtons(){
                 const targetId = btn.getAttribute('data-target');
                 if (!targetId) return;
 
-                // show target and hide other media sections (photos/videos/presentations/years) within the same phase
-                parentPhase.querySelectorAll('[id$="-photos-section"], [id$="-videos-section"], [id$="-final-section"], [id$="-first-section"], [id$="-2025-section"], [id$="-2026-section"]').forEach(el => {
+                // show target and hide other media sections (photos/videos/presentations/years/documents/visual-content) within the same phase
+                parentPhase.querySelectorAll('[id$="-photos-section"], [id$="-videos-section"], [id$="-final-section"], [id$="-first-section"], [id$="-2024-section"], [id$="-2025-section"], [id$="-2026-section"], [id$="-documents-section"], [id$="-visual-content-section"]').forEach(el => {
                     el.style.display = (el.id === targetId) ? 'block' : 'none';
                 });
             });

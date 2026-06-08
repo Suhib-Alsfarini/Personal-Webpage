@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializePDFs();
     initializeModal();
     initializeNavigation();
+    initializeMarketingTabs();
     setupScrollSpy();
 });
 
@@ -578,6 +579,34 @@ function initializeNavigation() {
             
             if (targetSection) {
                 targetSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+}
+
+// Marketing Materials Tab Switching
+function initializeMarketingTabs() {
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    console.log('Marketing tabs found:', tabButtons.length, 'buttons,', tabContents.length, 'contents');
+    
+    tabButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const tabName = button.getAttribute('data-tab');
+            console.log('Clicked tab:', tabName);
+            
+            // Remove active class from all buttons and contents
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            // Add active class to clicked button and corresponding content
+            button.classList.add('active');
+            const tabContent = document.getElementById(tabName + '-tab');
+            console.log('Tab content element:', tabContent);
+            if (tabContent) {
+                tabContent.classList.add('active');
             }
         });
     });

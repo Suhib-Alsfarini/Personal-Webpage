@@ -1,6 +1,6 @@
 # 🌐 Personal Portfolio Website
 
-A modern, responsive CV/portfolio website showcasing my professional profile, projects, and interests.
+A modern, responsive CV/portfolio website showcasing Suhib Alsfarini's professional profile, projects, and interests.
 
 ---
 
@@ -8,10 +8,10 @@ A modern, responsive CV/portfolio website showcasing my professional profile, pr
 
 <div align="center">
   
-**[→ Visit My Portfolio ←](https://aelsheshtawy.com/)**
+**[→ Visit My Portfolio ←](https://alsfarini.vercel.app/)**
 
 </div>
 
 ---
 
-Built with HTML, CSS, and JavaScript • Designed by Ahmed Khedr Elsheshtawy
+Built with HTML, CSS, and JavaScript • Designed by Suhib Alsfarini

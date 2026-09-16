@@ -385,6 +385,12 @@ body {
     padding: 0 80px;
 }
 
+.menu-toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 /* Mobile Menu Toggle Button - Hidden by default */
 .mobile-menu-toggle {
     display: none;
@@ -839,7 +845,12 @@ body {
     .mobile-menu-toggle {
         display: flex;
     }
-    
+
+    .menu-toggle-row {
+        justify-content: space-between;
+        width: 100%;
+    }
+
     .menu-text{
         display: inline;
         font-size: 24px;

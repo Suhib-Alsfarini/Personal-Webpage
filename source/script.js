@@ -133,11 +133,12 @@ document.addEventListener('DOMContentLoaded', initMediaToggleButtons);
 // Handle page load with hash in URL, if the user edits the URL manually or uses back/forward buttons
 function loadSectionFromHash() {
     const hash = window.location.hash;
-    if (hash) {
-        const targetId = hash.substring(1);
+    const targetId = hash ? hash.substring(1) : '';
+
+    // Default to About section if no hash is present, or if the hash doesn't match any section
+    if (targetId && document.getElementById(targetId)) {
         activateSection(targetId, false);
     } else {
-        // Default to About section if no hash is present
         activateSection('about', false);
     }
 }
@@ -151,8 +152,9 @@ document.addEventListener('contextmenu', function(e) {
     e.preventDefault();
 });
 
-// Disabling text selection
+// Disabling text selection (except for elements meant to be copied, e.g. the email address)
 document.addEventListener('selectstart', function(e) {
+    if (e.target.closest('.email-display')) return;
     e.preventDefault();
 });
 
